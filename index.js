@@ -1,4 +1,4 @@
-var app = angular.module('trumpMeltdown', []);
+var app = angular.module('trumpMeltdown', ['ngSanitize']);
 app.controller('meltdownCtrl', function($scope, $http, $interval, Page, $window) {
     var needle;
     $scope.notMeltdownColor = "#00a900";
@@ -32,6 +32,16 @@ app.controller('meltdownCtrl', function($scope, $http, $interval, Page, $window)
             Page.setTitle("Nope")
         }
 
+        for (i = 0; i < data.NumTweets; i++) {
+            console.log("yo");
+            data.Tweets[i].visible = false;
+            data.Tweets[i].Percent = (100 - ((data.Tweets[i].Sentiment + 1) * 50)).toFixed(0);
+            $scope.tweets.push(data.Tweets[i]);
+        }
+
+        console.log("hi");
+        console.log($scope.tweets);
+
 
 
         gtag('event', 'meltdown', {
@@ -53,15 +63,16 @@ app.controller('meltdownCtrl', function($scope, $http, $interval, Page, $window)
         // var total = 0;
 
         var animationInterval = $interval(function(){
-            if (i == numTweets) {
-                $interval.cancel(animationInterval);
-            }
             // Unshift will go in reverse order (Newest last)
-            data.Tweets[i].Percent = (100 - ((data.Tweets[i].Sentiment + 1) * 50)).toFixed(0);
-            $scope.tweets.push(data.Tweets[i]);
+            $scope.tweets[i].visible = true;
+            // debugger;
+            twttr.widgets.load();
 
             i++;
-        }, 500);
+            if (i > numTweets) {
+                $interval.cancel(animationInterval);
+            }
+        }, 250);
     }
 
     (function(){
