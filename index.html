@@ -19,7 +19,7 @@
             'custom_map': {'metric<Index>': 'meltdown-level'}
         });
     </script>
-    <title>Is Trump Melting Down? ({{Page.title()}})</title>
+    <title ng-cloak>Is Trump Melting Down? ({{Page.title()}})</title>
 
     <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
     <!--<script>-->
@@ -219,7 +219,7 @@
 <div class="header">
     <a href="https://twitter.com/istrumpmeltdown?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @istrumpmeltdown</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
-<div class="meltdown-status">
+<div class="meltdown-status" ng-cloak>
     <h1>Trump is {{meltdownStatus}}</h1>
 </div>
 <div class="chart-gauge"></div>
