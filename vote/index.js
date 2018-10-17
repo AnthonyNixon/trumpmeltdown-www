@@ -65,6 +65,11 @@ app.controller('meltdownCtrl', function($scope, $http, $interval, Page, $window)
         voteData.id = $scope.tweet.id;
         voteData.vote = "meltdown";
         getNewTweetExclude(voteData.id);
+        gtag('event', 'submit', {
+            'event_category': 'vote',
+            'event_label': 'meltdown'
+        });
+
         $http.post(voteURL, voteData)
             .then(
                 function(response){
@@ -82,6 +87,10 @@ app.controller('meltdownCtrl', function($scope, $http, $interval, Page, $window)
         voteData.id = $scope.tweet.id;
         voteData.vote = "not-meltdown";
         getNewTweetExclude(voteData.id);
+        gtag('event', 'submit', {
+            'event_category': 'vote',
+            'event_label': 'not-meltdown'
+        });
         $http.post(voteURL, voteData)
             .then(
                 function(response){

@@ -199,10 +199,10 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 50px;
-            display: flex;
+            height: 10%;
             align-items: center;
-
+            text-align: center;
+            background-color: #00aabb;
         }
 
         .header {
@@ -210,18 +210,29 @@
             top: 0;
             left: auto;
             right: 5%;
-            height: 50px;
-            display: flex;
+            height: 150px;
+            display: block;
             align-items: center;
+        }
 
-
+        .vote-button {
+            background-color: #F44336; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
         }
     </style>
 
 </head>
 <body ng-controller="meltdownCtrl" ng-style="{'background-color':background}" class="background">
 <div class="header">
-    <a href="https://twitter.com/istrumpmeltdown?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @istrumpmeltdown</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <!--<a href="https://twitter.com/istrumpmeltdown?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @istrumpmeltdown</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>-->
+    <button class="vote-button" ng-click="gotoVoting()">Help train this Site!</button>
 </div>
 <div class="meltdown-status">
     <h1>Trump is {{meltdownStatus}}</h1>
@@ -246,7 +257,6 @@
         </div>
     </div>
 </div>
-<div class="footer">IsTrumpMeltingDown uses Machine Learning which means it relies on YOU voting to help train it! </div>
 <script type="text/javascript" src="index.js"></script>
 </body>
 
