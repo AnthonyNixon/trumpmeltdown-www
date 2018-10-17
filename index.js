@@ -219,6 +219,10 @@ app.controller('meltdownCtrl', function($scope, $http, $interval, Page, $window)
         $window.open('https://twitter.com/realDonaldTrump/status/' + tweetID, '_blank');
     };
 
+    $scope.gotoVoting = function() {
+        $window.open('/vote/');
+    };
+
     $scope.formatNumber = function(i) {
         return i;
     };
