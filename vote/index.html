@@ -21,14 +21,17 @@
     <title>Is Trump Melting Down? Vote</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.6/angular-sanitize.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
     <style type="text/css">
 
-        .tweetDisplay
+        .tweetDisplay, .buttonDisplay
         {
-            width: 80%;
+            max-width: 70%;
             margin-left: auto;
             margin-right: auto;
+            padding-left: 2%;
+            padding-right: 2%;
         }
 
         .tweet
@@ -42,10 +45,8 @@
             background: #00aabb;
             border-radius: .4em;
 
-            display: flex;
+            /*display: flex;*/
             vertical-align: middle;
-
-            cursor: pointer;
 
 
             -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
@@ -53,28 +54,6 @@
             -ms-animation: fadein 1s; /* Internet Explorer */
             -o-animation: fadein 1s; /* Opera < 12.1 */
             animation: fadein 1s;
-        }
-
-
-
-        .indicator
-        {
-            float: left;
-            width: auto;
-            text-align: center;
-            display: flex;
-            align-items: center;
-        }
-
-        .percentage
-        {
-            float: left;
-            width: auto;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            padding-left: 1%;
-            padding-right: 1%;
         }
 
         .text
@@ -122,22 +101,79 @@
         }
         .meltdown-status
         {
+            margin-top: 2%;
             text-align: center;
             margin-left: auto;
             margin-right: auto;
+            max-width: 70%;
+        }
+
+        .meltdown-button {
+            background-color: #F44336; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
+        .not-meltdown-button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
+        .buttonContainer {
+            padding-left: 15%;
+            padding-right: 15%;
+            display: flex;
+            justify-content: space-between;
         }
 
     </style>
+    <script>window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
 
+        t._e = [];
+        t.ready = function(f) {
+            t._e.push(f);
+        };
+
+        return t;
+    }(document, "script", "twitter-wjs"));</script>
 </head>
-<body ng-controller="meltdownCtrl" style="background-color: #00a900;">
-<div class="header">
-    <a href="https://twitter.com/istrumpmeltdown?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @istrumpmeltdown</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-</div>
+<body ng-controller="meltdownCtrl" style="background-color: #FFFFF0;">
+<!--<div class="header">-->
+    <!--<a href="https://twitter.com/istrumpmeltdown?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @istrumpmeltdown</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>-->
+<!--</div>-->
 <div class="meltdown-status">
     <h1>Contribute to Is Trump Melting Down!</h1>
     <p>IsTrumpMeltingDown.com needs your help! This site uses machine learning to determine if a Trump is melting down in his tweets. To teach the site what is and is not a meltdown, we need you to vote! Simply click whether you think a tweet is or is not melting down and you will help the site get smarter!</p>
 </div>
+<!--<div class="buttonDisplay">-->
+    <!--<h2>Is this a meltdown?</h2>-->
+    <!--<span><button class="meltdown-button">YES</button> <button class="not-meltdown-button">NO</button></span>-->
+
+<!--</div>-->
 <div class="tweetDisplay">
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <!-- istrumpmeltingdown-banner -->
@@ -149,11 +185,14 @@
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
-    <div class="tweet">
-        <div class="indicator"><i ng-class="{'fas fa-exclamation-triangle':(tweet.Sentiment < 0), 'fas fa-check-circle':(tweet.Sentiment >= 0)}"></i></div>
-        <div class="percentage"><strong>{{tweet.Percent}}%</strong></div>
+    <div class="tweet" ng-if="!loading">
+        <h2>Is Trump Melting Down in this tweet?</h2>
+        <div>
+            <button class="meltdown-button" ng-click="voteYes()">YES</button> <button class="not-meltdown-button" ng-click="voteNo()">NO</button>
+        </div>
+        <!--<span class="buttonSpan"></span>-->
         <div class="text">
-            {{tweet.Text}}
+            <div ng-bind-html="tweet.embedHTML"></div>
         </div>
     </div>
 </div>
