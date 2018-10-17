@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html ng-app="trumpMeltdown" ng-controller="titleCtrl">
-<!--<script>-->
-    <!--if (location.hostname !== "localhost" || location.hostname !== "127.0.0.1") {-->
-        <!--if (location.protocol !== "https:") location.protocol = "https:";-->
-    <!--}-->
-<!--</script>-->
 <head>
     <meta name="description" content="Using Sentiment Analysis to determine if Trump is having a meltdown on Twitter.">
     <meta name="keywords" content="Donald, Trump, Meltdown, Melting, Down, Politics, Satire">
 
     <link rel="icon"
           type="image/ico"
-          href="favicon.ico">
+          href="http://www.istrumpmeltingdown.com/favicon.ico">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116534711-1"></script>
     <script>
@@ -23,100 +18,26 @@
             'custom_map': {'metric<Index>': 'meltdown-level'}
         });
     </script>
-    <title>Is Trump Melting Down? ({{Page.title()}})</title>
+    <title>Is Trump Melting Down? Vote</title>
 
-    <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
-    <!--<script>-->
-     <!--(adsbygoogle = window.adsbygoogle || []).push({-->
-          <!--google_ad_client: "ca-pub-4454954940898831",-->
-          <!--enable_page_level_ads: true-->
-     <!--});-->
-    <!--</script>-->
-
-    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.6/angular-sanitize.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
-    <script>window.twttr = (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0],
-            t = window.twttr || {};
-        if (d.getElementById(id)) return t;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://platform.twitter.com/widgets.js";
-        fjs.parentNode.insertBefore(js, fjs);
-
-        t._e = [];
-        t.ready = function(f) {
-            t._e.push(f);
-        };
-
-        return t;
-    }(document, "script", "twitter-wjs"));</script>
     <style type="text/css">
-        .chart-gauge
-        {
-            width: 30%;
-            margin-left: auto;
-            margin-right: auto;
-            bottom: -50%;
-        }
-        .chart-filled
-        {
-            fill: steelblue;
-        }
-        .chart-empty
-        {
-            fill: #dedede;
-        }
-
-        .needle, .needle-center
-        {
-            fill: #464A4F;
-        }
-
-        svg {
-            font: 10px sans-serif;
-            height: calc(407px / 2);
-        }
-
-        .meltdown-status
-        {
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .background
-        {
-            background-color: #00a900;
-            -webkit-transition: all 1s ease-in-out;
-            -moz-transition: all 1s ease-in-out;
-            -o-transition: all 1s ease-in-out;
-            -ms-transition: all 1s ease-in-out;
-            transition: all 1s ease-in-out;
-        }
 
         .tweetDisplay
         {
-            width: 62%;
+            width: 80%;
             margin-left: auto;
             margin-right: auto;
         }
 
         .tweet
         {
-            width: auto;
-            min-width: 600px;
-            overflow: hidden;
+            width: 100%;
             text-align: center;
             height: auto;
             padding: 10px;
-            margin-top: 15px;
-
-            margin-left: auto;
-            margin-right: auto;
-
+            margin-top: 5px;
 
             background: #00aabb;
             border-radius: .4em;
@@ -160,10 +81,6 @@
         {
             width: auto;
             text-align: center;
-            align-items: center;
-            margin-right: auto;
-            margin-left: auto;
-
         }
         @keyframes fadein {
             from { opacity: 0; }
@@ -194,17 +111,6 @@
             to   { opacity: 1; }
         }
 
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 50px;
-            display: flex;
-            align-items: center;
-
-        }
-
         .header {
             position: fixed;
             top: 0;
@@ -213,20 +119,25 @@
             height: 50px;
             display: flex;
             align-items: center;
-
-
         }
+        .meltdown-status
+        {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
     </style>
 
 </head>
-<body ng-controller="meltdownCtrl" ng-style="{'background-color':background}" class="background">
+<body ng-controller="meltdownCtrl" style="background-color: #00a900;">
 <div class="header">
     <a href="https://twitter.com/istrumpmeltdown?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @istrumpmeltdown</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
 <div class="meltdown-status">
-    <h1>Trump is {{meltdownStatus}}</h1>
+    <h1>Contribute to Is Trump Melting Down!</h1>
+    <p>IsTrumpMeltingDown.com needs your help! This site uses machine learning to determine if a Trump is melting down in his tweets. To teach the site what is and is not a meltdown, we need you to vote! Simply click whether you think a tweet is or is not melting down and you will help the site get smarter!</p>
 </div>
-<div class="chart-gauge"></div>
 <div class="tweetDisplay">
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <!-- istrumpmeltingdown-banner -->
@@ -238,11 +149,11 @@
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
-    <div ng-repeat="tweet in tweets" class="tweet" ng-click="gotoTweet(tweet.Id)" ng-show="tweet.visible">
+    <div class="tweet">
         <div class="indicator"><i ng-class="{'fas fa-exclamation-triangle':(tweet.Sentiment < 0), 'fas fa-check-circle':(tweet.Sentiment >= 0)}"></i></div>
         <div class="percentage"><strong>{{tweet.Percent}}%</strong></div>
         <div class="text">
-            <div ng-bind-html="tweet.EmbedHTML"></div>
+            {{tweet.Text}}
         </div>
     </div>
 </div>
